@@ -59,12 +59,11 @@ div#nav-header
     width: 100%;
     height: inherit;
     padding: 1% 2% 1% 2%;
-    background-color: blue;
+    background-color: white;
     opacity:0.5;
 }
 
 /*Content div*/
-/*Maybe I should make it a container-only div?*/
 div#content
 {
     position:relative;
@@ -73,8 +72,6 @@ div#content
     padding: 1% 2% 1% 2%;
     width: auto;
     background-color: green;
-    white-space: normal;
-    word-break: break-all;
 }
 
 /*The footer (duh) div. Still needs to know if its a div called footer, or */
@@ -107,7 +104,7 @@ Chrome and Firefox (version circa 2014/03/10)
 #left-panel:hover
 {
     width: 30%;
-    background-color: blue;
+    background-color: #fff;
 }
 
 div#right-panel
@@ -124,7 +121,7 @@ div#right-panel
 /*classes*/
 /*
 Needs to put these ones on a separated div
-'cause I coundn't force them to not inherit
+'cause I couldn't force them to not inherit
 the opacity from the nav-bar div
 */
 .nav-links
@@ -138,10 +135,29 @@ the opacity from the nav-bar div
 div.button
 {
     position:fixed;
-    right: 5%;
+    top: 2%;
+    right: 2%;
     left: auto;
-    background-color: black;
+    background-color: white;
+    border-color: black;
+    border-width: 1;
+    border-style: solid;
+    padding: 2px 2px 2px 2px;
     max-height: 50px;
     max-width:  100px;
     opacity: 1.0;
+}
+
+
+/*Content cell div*/
+div.content-cell
+{
+    position:relative;
+    z-index:0;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+/*    margin: 10px 10px 10px 10px;*/
+    white-space: normal;
+    word-break: break-all;
 }

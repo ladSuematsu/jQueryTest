@@ -16,14 +16,13 @@
             <!-- container div for the navigation bar. The child elements of nav-header div were inheriting its opacity property -->
             <div id="nav-container">
                 <div id="nav-header">
-                    <div class="nav-links">
+                </div>
+                <div class="nav-links">
                         <a href="#">Home</a>
                         <a href="#">F.A.Q</a>
                     </div>
-
-                </div>
-                <div id="about" class="button">
-                        <p>this is a button</p>
+                <div id="nav-button-about" class="button">
+                        <p>About</p>
                 </div>
             </div>
 
@@ -59,25 +58,87 @@
 
             </div>
 
+            <!-- Modal dialog divs -->
+            <div id="modal-about" class="modal-dialog">
 
-            <footer >
+                <div>
+                    <h1 style="text-align:center;">M.A.W.jQ - Messing Around With jQuery</h1>
+                    <p>
+                        This is a non-profitable project of a nice guy programmer, messing around with the tools for developing web front-end
+                        applications. And of course, trying (hard) to make it look nice.
+                    </p>
+                    <p>
+                        You can use this as a source material for studying HTML, CSS, jQuery and JavaScript. The only thing I ask
+                you, my friend, is to (PLEASE!) credit me if you are ever going to reproduce, or alter it. Don't credit yourself for other people's doings. Otherwise, you're a fucking a****le and deserves to die an horrible death - just kidding (nope).</p>
+
+                    <p>All the source is available at my gitHub account: https://github.com/ladSuematsu/jQueryTest</p>
+                </div>
+            </div>
+
+
+            <footer>
                 <p>footer content</p>
             </footer>
 
             <script type="text/javascript">
-        //        var leftMenu = $("#left-panel");
-        //        
-        //        leftMenu.mouseenter(function()
-        //           {
-        //                $(this).animate({width: "30%"},300);
-        //           }
-        //        );
-        //        
-        //        leftMenu.mouseout(function()
-        //           {
-        //                $(this).animate({width: "5%"},300);
-        //           }
-        //        );
+
+                var modalAbout = $("#modal-about");
+                var navButtonAbout = $("#nav-button-about");
+
+//                modalAbout.click(
+//                    function()
+//                    {
+//                        $(this).animate(
+//                            {opacity:"0"}
+//                            ,1000
+//                            ,"linear"
+//                            ,function(){
+//                                $(this).css("display", "none");
+//                            }
+//                        );
+//                    }
+//                );
+
+                modalAbout.click(
+                    function()
+                    {
+                        $(this).fadeOut(
+                             500
+                            ,function(){
+                                $(this).css("display", "none");
+                            }
+                        );
+                    }
+                );
+
+                navButtonAbout.click(function()
+                     {
+                        modalAbout.fadeIn(500
+                            ,function(){
+                                $(this).css("display", "block");
+                            }
+                        );
+                     }
+
+                );
+
+
+
+                //                var leftMenu = $("#left-panel");
+//
+//
+//
+//                leftMenu.mouseenter(function()
+//                   {
+//                        $(this).animate({width: "30%"},300);
+//                   }
+//                );
+//
+//                leftMenu.mouseout(function()
+//                   {
+//                        $(this).animate({width: "5%"},300);
+//                   }
+//                );
 
 
             </script>

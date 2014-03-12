@@ -29,30 +29,13 @@
 
 
             <div id="content">
-
-            <div class="content-cell">
-                        <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
-                <p>loremipsumloremipsumloremipsumloremipsumloremipsumloremipsumloremipsum</p>
+                <div class="content-cell">
+                <h1>Hello World</h1>
+                <p>This is a test</p>
                 </div>
+
             </div>
+
 
             <div id="left-panel">
 
@@ -61,6 +44,7 @@
             <!-- Modal dialog divs -->
             <div id="modal-about" class="modal-dialog">
 
+                <div id="button-close" class="button">X</div>
                 <div>
                     <h1 style="text-align:center;">M.A.W.jQ - Messing Around With jQuery</h1>
                     <p>
@@ -84,6 +68,7 @@
 
                 var modalAbout = $("#modal-about");
                 var navButtonAbout = $("#nav-button-about");
+                var buttonClose = $("#button-close");
 
 //                modalAbout.click(
 //                    function()
@@ -99,11 +84,11 @@
 //                    }
 //                );
 
-                modalAbout.click(
+               buttonClose.click(
                     function()
                     {
-                        $(this).fadeOut(
-                             500
+                        $(this).parent().fadeOut(
+                             200
                             ,function(){
                                 $(this).css("display", "none");
                             }
@@ -113,7 +98,7 @@
 
                 navButtonAbout.click(function()
                      {
-                        modalAbout.fadeIn(500
+                        modalAbout.fadeIn(200
                             ,function(){
                                 $(this).css("display", "block");
                             }
@@ -123,6 +108,7 @@
                 );
 
 
+// jQuery implementation of the left menu animation
 
                 //                var leftMenu = $("#left-panel");
 //

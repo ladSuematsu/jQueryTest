@@ -18,8 +18,8 @@
                 <div id="nav-header">
                 </div>
                 <div class="nav-links">
-                        <a href="#">Home</a>
-                        <a href="#">F.A.Q</a>
+                        <a id="nav-link-home" href="#">Home</a>
+                        <a id="nav-link-faq" href="#">F.A.Q</a>
                     </div>
                 <div id="nav-button-about" class="button">
                         <p>About</p>
@@ -29,11 +29,7 @@
 
 
             <div id="content">
-                <div class="content-cell">
-                <h1>Hello World</h1>
-                <p>This is a test</p>
-                </div>
-
+                <!-- Contents from navigation links will be loaded here via jQuery -->
             </div>
 
 
@@ -41,27 +37,16 @@
 
             </div>
 
+
             <!-- Modal dialog divs -->
             <div id="modal-about" class="modal-dialog">
-
                 <div id="button-close" class="button">X</div>
-                <div>
-                    <h1 style="text-align:center;">M.A.W.jQ - Messing Around With jQuery</h1>
-                    <p>
-                        <b>M.A.W.jQ</b> is a non-profitable project made by a nice-guy-programmer, messing around with the tools for developing web front-end
-                        applications. And of course, trying (hard) to make it look nice.
-                    </p>
-                    <p>
-                        You can use this as a source material for studying HTML, CSS, jQuery and JavaScript. The only thing I ask
-                you, my friend, is to (PLEASE!) credit me if you are ever going to reproduce, or alter it. Don't credit yourself for other people's doings. Otherwise, you're a fucking a****le and deserves to die an horrible death - just kidding (nope).</p>
-
-                    <p>All the source is available at my gitHub account: https://github.com/ladSuematsu/jQueryTest</p>
-                </div>
+                <div id="about-content"></div>
             </div>
 
 
             <footer>
-                    (Copyleft) ladSuematsu, 2014. You can reproduce or alter this. But credit me, 'kay?
+                    (Copyleft) ladSuematsu, 2014. You can reproduce or alter this.
             </footer>
 
             <script type="text/javascript">
@@ -69,6 +54,20 @@
                 var modalAbout = $("#modal-about");
                 var navButtonAbout = $("#nav-button-about");
                 var buttonClose = $("#button-close");
+                var faqHl = $("#nav-link-faq");
+                var homeHl = $("#nav-link-home");
+                var content = $("#content");
+
+                homeHl.click(function()
+                {
+                    content.load("home.html");
+                });
+
+
+                faqHl.click(function()
+                {
+                    content.load("faq.html");
+                });
 
                buttonClose.click(
                     function()
@@ -84,8 +83,12 @@
 
                 navButtonAbout.click(function()
                      {
-                        modalAbout.fadeIn(200
+
+                         $("#about-content").load("about.html");
+                         modalAbout.fadeIn(200
                             ,function(){
+
+
                                 $(this).css("display", "block");
                             }
                         );

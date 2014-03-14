@@ -8,23 +8,24 @@
 <!--        <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" type="text/css">-->
             <link rel="stylesheet" href="css/styles.css" type="text/css">
             <script type="text/javascript"  src="js/jquery-1.10.2.js"></script>
-<!--            <script type="text/javascript"  src="js/jquery-ui-1.10.4.custom.js"></script>-->
+<!--            <script type="text/javascript" src="js/jquery-2.1.0.js"></script>-->
+            <script type="text/javascript"  src="js/jquery-ui-1.10.4.custom.js"></script>
 
         </head>    
 
         <body>
             <!-- container div for the navigation bar. The child elements of nav-header div were inheriting its opacity property -->
-            <div id="nav-container">
+            <header>
                 <div id="nav-header">
-                </div>
-                <div class="nav-links">
-                        <a id="nav-link-home" href="#">Home</a>
-                        <a id="nav-link-faq" href="#">F.A.Q</a>
+                    <div class="nav-links">
+                            <a id="nav-link-home" href="#">Home</a>
+                            <a id="nav-link-faq" href="#">F.A.Q</a>
                     </div>
-                <div id="nav-button-about" class="button">
-                        <p>About</p>
+                    <div id="nav-button-about" class="button unselectable">
+                            <p>About</p>
+                    </div>
                 </div>
-            </div>
+            </header>
 
 
 
@@ -34,13 +35,20 @@
 
 
             <div id="left-panel">
+                <ul class="unselectable">
+                    <li>HOME</li>
+                    <li>FAQ</li>
+                    <li>RECOMMENDED LINKS</li>
+                </ul>
+            </div>
 
+            <div id="right-panel">
             </div>
 
 
             <!-- Modal dialog divs -->
             <div id="modal-about" class="modal-dialog">
-                <div id="button-close" class="button">X</div>
+                <div id="button-close" class="button unselectable">X</div>
                 <div id="about-content"></div>
             </div>
 
@@ -95,7 +103,6 @@
                      }
 
                 );
-
 
 // jQuery implementation of the left menu animation
 

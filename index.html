@@ -23,7 +23,7 @@
                 var menuButton = $('#nav-button-menu');
                 var leftMenu = $('#left-panel');
                 var leftMenuBehavior = {
-                    /*position: 'left',*/
+                    mainCssClass: 'menu',
                     activeCssClass: 'left-menu-active' ,
                     inactiveCssClass: 'left-menu-inactive',
                     animationSpeed: 300,
@@ -31,12 +31,11 @@
 
                 var rightMenu = $('#right-panel');
                 var rightMenuBehavior = {
-                    position: 'right',
-                    activeValue: '0px',
-                    inactiveValue: '-49%',
+                    activeCssClass: 'right-menu-active' ,
+                    inactiveCssClass: 'right-menu-inactive',
                     animationSpeed: 300,
-                    animationType: 'wat'
                 };
+                var navHeader = $('#nav-header');
 
                 function contentLoad(contentObject, url)
                 {
@@ -87,20 +86,22 @@
 
                 function slidingMenuConstructor(menuObject, objectData, objectBind)
                 {
+                    menuObject.addClass(objectData.mainCssClass);
+                    menuObject.addClass(objectData.activeCssClass);
                     menuObject.addClass(objectData.inactiveCssClass);
 
                     menuObject.mouseenter(function(){
-                            $(this).switchClass(
+                        if($(this).hasClass(objectData.inactiveCssClass))
+                        {
+                            $(this).removeClass(
                                 objectData.inactiveCssClass,
-                                objectData.activeCssClass,
                                 objectData.animationSpeed
                             );
-                       }
-                    );
+                        }
+                   });
 
                     menuObject.mouseleave(function(){
-                        $(this).switchClass(
-                            objectData.activeCssClass,
+                        $(this).addClass(
                             objectData.inactiveCssClass,
                             objectData.animationSpeed
                         );
@@ -127,7 +128,28 @@
 
                 }
 
+                var previousWindowScrollState = 0;
+                function scrollEventController(object)
+                {
+                    object.scroll(function(){
+                        if($(this).scrollTop() - previousWindowScrollState > 0)
+                        {
+                            navHeader.stop().animate({top: '-10%'}, 50);
+                            leftMenu.addClass('menu-full-height');
+                        }
+                        else
+                        {
+                            navHeader.stop().animate({top: '0'}, 50);
+                            leftMenu.removeClass('menu-full-height');
+                        }
+
+                        previousWindowScrollState = $(this).scrollTop();
+                    });
+                }
+
                slidingMenuConstructor(leftMenu, leftMenuBehavior, menuButton);
+               scrollEventController($(this));
+                rightMenu.hide();
                //slidingMenuConstructor(rightMenu, rightMenuBehavior);
 
 
@@ -139,7 +161,7 @@
         <body>
                 <div id='left-panel'>
                     <ul class='unselectable menu-list'>
-                        <li>HOME</li>
+                        <li class='nav-link-home'>HOME</li>
                         <li class='nav-link-faq'>FAQ</li>
                         <li>RECOMMENDED LINKS</li>
                         <li id='nav-button-about'>ABOUT</li>
@@ -156,16 +178,6 @@
                     <div id="nav-button-menu" class="unselectable">
                         <span class='button ico-menu'>MENU</span>
                     </div>
-
-                    <div class="nav-links">
-                            <a id="nav-link-home" href="#">Home</a>
-                            <a class="nav-link-faq" href="#">F.A.Q</a>
-                    </div>
-<!--
-                    <div id="nav-button-about" class="button unselectable">
-                        About
-                    </div>
--->
                 </div>
             </header>
 

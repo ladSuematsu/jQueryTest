@@ -112,31 +112,40 @@ The CSS for the sliding panel div. Using CSS3 selector hover
 for purposes of simplicity - not worrying about
 cross browser issues - only tested in
 Chrome and Firefox (version circa 2014/03/10)
+
+EDIT 2014/09/02: quit using CSS pseudoclasses
+for interaction. Not too flexible, wanted more liberty,
+so switched to jQuery-UI's class switching animations.
+
 */
-.left-menu-active
+
+.menu
 {
     position: fixed;
     z-index: 1;
     top:10%;
-/*    margin-top: 80px;*/
     width: 50%;
     height: 100%;
     left: 0%;
+    opacity: 1;
+}
+
+.menu-full-height
+{
+    top: 0%;
+}
+
+.left-menu-active
+{
+    left: 0%;
     background-color: black;
-/*    visibility:collapse;*/
     opacity: 1;
 }
 
 .left-menu-inactive
 {
-    position: fixed;
-    z-index: 1;
-    top:10%;
-    width: 50%;
-    height: 100%;
     left: -49%;
-    background-color: gray;
-    opacity: 1;
+    opacity: 0;
 }
 
 /*

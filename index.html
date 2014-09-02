@@ -10,120 +10,182 @@
             <script type="text/javascript"  src="js/jquery-1.10.2.js"></script>
 <!--            <script type="text/javascript" src="js/jquery-2.1.0.js"></script>-->
             <script type="text/javascript"  src="js/jquery-ui-1.10.4.custom.js"></script>
-
-        </head>    
-
-        <body>
-            <!-- container div for the navigation bar. The child elements of nav-header div were inheriting its opacity property -->
-            <header>
-                <div id="nav-header">
-                    <div class="nav-links">
-                            <a id="nav-link-home" href="#">Home</a>
-                            <a id="nav-link-faq" href="#">F.A.Q</a>
-                    </div>
-                    <div id="nav-button-about" class="button unselectable">
-                            <p>About</p>
-                    </div>
-                </div>
-            </header>
-
-
-
-            <div id="content">
-                <!-- Contents from navigation links will be loaded here via jQuery -->
-            </div>
-
-
-            <div id="left-panel">
-                <ul class="unselectable">
-                    <li>HOME</li>
-                    <li>FAQ</li>
-                    <li>RECOMMENDED LINKS</li>
-                </ul>
-            </div>
-
-            <div id="right-panel">
-            </div>
-
-
-            <!-- Modal dialog divs -->
-            <div id="modal-about" class="modal-dialog">
-                <div id="button-close" class="button unselectable">X</div>
-                <div id="about-content"></div>
-            </div>
-
-
-            <footer>
-                    (Copyleft) ladSuematsu, 2014. You can reproduce or alter this.
-            </footer>
-
             <script type="text/javascript">
+            $(document).ready(function(){
 
-                var modalAbout = $("#modal-about");
-                var navButtonAbout = $("#nav-button-about");
-                var buttonClose = $("#button-close");
-                var faqHl = $("#nav-link-faq");
-                var homeHl = $("#nav-link-home");
-                var content = $("#content");
+                var modalAbout = $('#modal-about');
+                var navButtonAbout = $('#nav-button-about');
+                var navButtonFaq = $('#nav-button-faq');
+                var buttonClose = $('.button-close');
+                var faqHl = $('.nav-link-faq');
+                var homeHl = $('.nav-link-home');
+                var content = $('#content');
+                var menuButton = $('#nav-button-menu');
+                var leftMenu = $('#left-panel');
+                var leftMenuBehavior = {
+                    /*position: 'left',*/
+                    activeCssClass: 'left-menu-active' ,
+                    inactiveCssClass: 'left-menu-inactive',
+                    animationSpeed: 300,
+                };
+
+                var rightMenu = $('#right-panel');
+                var rightMenuBehavior = {
+                    position: 'right',
+                    activeValue: '0px',
+                    inactiveValue: '-49%',
+                    animationSpeed: 300,
+                    animationType: 'wat'
+                };
+
+                function contentLoad(contentObject, url)
+                {
+                    contentObject.load(url);
+                }
+
 
                 homeHl.click(function()
                 {
-                    content.load("home.html");
+                    contentLoad(content, "home.html");
                 });
 
 
                 faqHl.click(function()
                 {
-                    content.load("faq.html");
+                    contentLoad(content, "faq.html");
                 });
 
                buttonClose.click(
                     function()
                     {
-                        $(this).parent().fadeOut(
-                             200
-                            ,function(){
-                                $(this).css("display", "none");
-                            }
-                        );
+                        $(this).parent().toggle(
+                            'drop'
+                             ,{direction : 'up'}
+                         );
                     }
                 );
 
-                navButtonAbout.click(function()
-                     {
 
-                         $("#about-content").load("about.html");
-                         modalAbout.fadeIn(200
-                            ,function(){
+                navButtonAbout.click(function(){
+                     $("#about-content").load("about.html",function(){
+                         modalAbout.toggle(
+                            'drop'
+                             ,{direction : 'up'}
+                         );
+                     });
+                 });
 
 
-                                $(this).css("display", "block");
-                            }
-                        );
-                     }
-
-                );
 
 // jQuery implementation of the left menu animation
 
-                //                var leftMenu = $("#left-panel");
-//
-//
-//
-//                leftMenu.mouseenter(function()
-//                   {
-//                        $(this).animate({width: "30%"},300);
-//                   }
-//                );
-//
-//                leftMenu.mouseout(function()
-//                   {
-//                        $(this).animate({width: "5%"},300);
-//                   }
-//                );
+
+                function slidingMenuConstructor(menuObject, objectData)
+                {
+                    slidingMenuConstructor(menu, objectData, null);
+                }
+
+                function slidingMenuConstructor(menuObject, objectData, objectBind)
+                {
+                    menuObject.addClass(objectData.inactiveCssClass);
+
+                    menuObject.mouseenter(function(){
+                            $(this).switchClass(
+                                objectData.inactiveCssClass,
+                                objectData.activeCssClass,
+                                objectData.animationSpeed
+                            );
+                       }
+                    );
+
+                    menuObject.mouseleave(function(){
+                        $(this).switchClass(
+                            objectData.activeCssClass,
+                            objectData.inactiveCssClass,
+                            objectData.animationSpeed
+                        );
+
+                    });
+
+                    menuObject.children().click(function(){
+                        menuObject.triggerHandler('mouseleave');
+                    });
+
+                    if(objectBind !== undefined)
+                    {
+                        objectBind.click(function(){
+                            if(menuObject.hasClass(objectData.inactiveCssClass))
+                            {
+                                menuObject.triggerHandler('mouseenter');
+                            }
+                            else
+                            {
+                                menuObject.triggerHandler('mouseleave');
+                            }
+                        });
+                    }
+
+                }
+
+               slidingMenuConstructor(leftMenu, leftMenuBehavior, menuButton);
+               //slidingMenuConstructor(rightMenu, rightMenuBehavior);
 
 
+            });
             </script>
+
+        </head>
+
+        <body>
+                <div id='left-panel'>
+                    <ul class='unselectable menu-list'>
+                        <li>HOME</li>
+                        <li class='nav-link-faq'>FAQ</li>
+                        <li>RECOMMENDED LINKS</li>
+                        <li id='nav-button-about'>ABOUT</li>
+                    </ul>
+                </div>
+
+                <div id="right-panel">
+                </div>
+
+
+            <!-- container div for the navigation bar. The child elements of nav-header div were inheriting its opacity property -->
+            <header>
+                <div id="nav-header">
+                    <div id="nav-button-menu" class="unselectable">
+                        <span class='button ico-menu'>MENU</span>
+                    </div>
+
+                    <div class="nav-links">
+                            <a id="nav-link-home" href="#">Home</a>
+                            <a class="nav-link-faq" href="#">F.A.Q</a>
+                    </div>
+<!--
+                    <div id="nav-button-about" class="button unselectable">
+                        About
+                    </div>
+-->
+                </div>
+            </header>
+
+            <main>
+                <div id="content">
+                    <!-- Contents from navigation links will be loaded here via jQuery -->
+                </div>
+
+
+                <!-- Modal dialog divs -->
+                <div id="modal-about" class="modal-dialog">
+                    <div class="button button-close unselectable">X</div>
+                    <div id="about-content"></div>
+                </div>
+            </main>
+
+            <footer>
+                    <div>(Copyleft) ladSuematsu, 2014. You can reproduce or alter this.</div>
+            </footer>
+
         </body>
 
         </html>
